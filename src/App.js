@@ -16,17 +16,17 @@ function App() {
 
   const [error, setError] = useState(null);
 
-  // Use relative URLs so this works behind Dokploy/Traefik (same-origin)
+  const API_BASE = (process.env.REACT_APP_API_BASE || "https://api.ruudjuffermans.nl").replace(/\/$/, "");
+
   const endpoints = useMemo(
     () => ({
-      health: "https://api.ruudjuffermans.nl/health",
-      serverMessage: "https://api.ruudjuffermans.nl/servermessage",
-      listMessages: "https://api.ruudjuffermans.nl/dbmessages",
-      createMessage: "https://api.ruudjuffermans.nl/dbmessage",
+      health: `${API_BASE}/health`,
+      serverMessage: `${API_BASE}/servermessage`,
+      listMessages: `${API_BASE}/dbmessages`,
+      createMessage: `${API_BASE}/dbmessage`,
     }),
-    []
+    [API_BASE]
   );
-
   const safeJson = async (res) => {
     const contentType = res.headers.get("content-type") || "";
     if (!contentType.includes("application/json")) {
