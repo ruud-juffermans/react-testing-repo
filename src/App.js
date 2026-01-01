@@ -7,7 +7,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/message")
+    fetch("https://api.ruudjuffermans.nl/api/message")
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}`);
